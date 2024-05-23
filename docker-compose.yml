@@ -8,6 +8,8 @@ services:
       POSTGRES_USER: db-tgbot
       POSTGRES_PASSWORD: tgbot
       POSTGRES_DB: gino-tgbot
+    networks:
+      - postgres-network
     volumes:
       - ./db-data/:/var/lib/postgresql/data/
     restart: on-failure
@@ -18,5 +20,11 @@ services:
     env_file:
       - .env
     restart: always
+    networks:
+      - postgres-network
     depends_on:
       - dp-postgres
+
+networks:
+  postgres-network:
+    driver: bridge
