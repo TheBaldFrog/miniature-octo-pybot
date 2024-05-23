@@ -7,7 +7,7 @@ services:
     environment:
       POSTGRES_USER: dbtgbot
       POSTGRES_PASSWORD: tgbot1
-      POSTGRES_DB: gino-tgbot
+      POSTGRES_DB: ginotgbot
     networks:
       - postgres-network
     volumes:
