@@ -14,7 +14,7 @@ services:
 
   py-test-bot:
     build: .
-    command: sh -c make run
+    command: python3.10 app.py
     env_file:
       - .env
     restart: always
