@@ -1,0 +1,22 @@
+version: '3'
+services:
+  dp-postgres:
+    image: postgres:16.3
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: db-tgbot
+      POSTGRES_PASSWORD: tgbot
+      POSTGRES_DB: tgbot
+    volumes:
+      - ./db-data/:/var/lib/postgresql/data/
+    restart: on-failure
+
+  py-test-bot:
+    build: .
+    command: sh -c make run
+    env_file:
+      - .env
+    restart: always
+    depends_on:
+      - dp-postgres
