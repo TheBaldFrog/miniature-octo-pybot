@@ -5,8 +5,8 @@ services:
     ports:
       - "5432:5432"
     environment:
-      POSTGRES_USER: db-tgbot
-      POSTGRES_PASSWORD: tgbot
+      POSTGRES_USER: dbtgbot
+      POSTGRES_PASSWORD: tgbot1
       POSTGRES_DB: gino-tgbot
     networks:
       - postgres-network
