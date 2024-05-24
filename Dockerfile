@@ -10,4 +10,4 @@ RUN chmod 755 .
 
 COPY . .
 
-CMD ["python3.10","app.py"]
+#CMD ["python3.10","app.py"]
