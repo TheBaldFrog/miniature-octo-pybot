@@ -9,22 +9,27 @@ services:
       POSTGRES_PASSWORD: tgbot1
       POSTGRES_DB: ginotgbot
     networks:
-      - postgres-network
+      - bot-network
     volumes:
       - ./db-data/:/var/lib/postgresql/data/
     restart: on-failure
 
   py-test-bot:
+    container_name: tgbotpostgres
     build: .
     command: python3.10 app.py
+    environment:
+      WEBAPP_PORT: 3001
     env_file:
       - .env
     restart: always
+    ports:
+      - "8443:3001"
     networks:
-      - postgres-network
+      - bot-network
     depends_on:
       - dp-postgres
 
 networks:
-  postgres-network:
+  bot-network:
     driver: bridge

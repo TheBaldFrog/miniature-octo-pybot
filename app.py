@@ -1,14 +1,26 @@
-from aiogram import executor
+from aiogram import executor, Dispatcher
 
-from loader import dp
+from data.config import WEBHOOK_URL, WEBHOOK_PATH, WEBAPP_HOST, WEBAPP_PORT
+from loader import dp, bot, SSL_CERTIFICATE, ssl_context
 import middlewares, filters, handlers
 from utils.notify_admins import on_startup_notify
 from utils.set_bot_commands import set_default_commands
 from loader import db
 from utils.db_api import db_gino
+import data.config
+
+
+async def set_webhook_on_startup(dispatcher: Dispatcher):
+    await bot.set_webhook(
+        url=WEBHOOK_URL,
+        certificate=SSL_CERTIFICATE
+    )
 
 
 async def on_startup(dispatcher):
+    # set webhook
+    await set_webhook_on_startup(dispatcher)
+
     print("Connecting to db...")
     await db_gino.on_startup(dp)
     print("Connected to db!")
@@ -30,5 +42,12 @@ async def on_startup(dispatcher):
 
 
 if __name__ == '__main__':
-    executor.start_polling(dp, on_startup=on_startup)
+    executor.start_webhook(
+        dispatcher=dp,
+        webhook_path=WEBHOOK_PATH,
+        on_startup=on_startup,
+        host=WEBAPP_HOST,
+        port=WEBAPP_PORT,
+        ssl_context=ssl_context
+    )
 

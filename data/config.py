@@ -12,3 +12,16 @@ PGUSER = env.str("PGUSER")
 PGPASSWORD = env.str("PGPASSWORD")
 DATABASE = env.str("DATABASE")
 POSTGRES_URI = f"postgresql://{PGUSER}:{PGPASSWORD}@{IP}/{DATABASE}"
+
+# webhook settings
+WEBHOOK_HOST = f"https://{IP}"
+WEBHOOK_PORT = 8443
+WEBHOOK_PATH = f"/bot/{BOT_TOKEN}"
+WEBHOOK_URL = f"{WEBHOOK_HOST}:{WEBHOOK_PORT}{WEBHOOK_PATH}"
+
+WEBHOOK_SSL_CERT = "webhook_cert.pem"
+WEBHOOK_SSL_PRIV = "webhook_pkey.pem"
+
+# webserver settings
+WEBAPP_HOST = "0.0.0.0"
+WEBAPP_PORT = env.str("WEBAPP_PORT")
