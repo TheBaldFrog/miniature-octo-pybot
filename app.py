@@ -1,8 +1,5 @@
-from aiogram import executor, Dispatcher
-
-from data.config import WEBHOOK_URL, WEBHOOK_PATH, WEBAPP_HOST, WEBAPP_PORT, WEBHOOK_HOST, IP
+from data.config import WEBHOOK_URL, WEBHOOK_PATH, WEBAPP_HOST, WEBAPP_PORT, WEBHOOK_HOST
 from loader import dp, bot, SSL_CERTIFICATE, ssl_context
-import middlewares, filters, handlers
 from utils.notify_admins import on_startup_notify
 from utils.set_bot_commands import set_default_commands
 from loader import db
@@ -15,6 +12,8 @@ async def on_startup(dispatcher):
         url=WEBHOOK_URL,
         certificate=SSL_CERTIFICATE
     )
+
+    import middlewares
 
     print("Connecting to db...")
     await db_gino.on_startup(dp)
@@ -36,6 +35,9 @@ async def on_startup(dispatcher):
 
 
 if __name__ == '__main__':
+    from aiogram import executor
+    from handlers import dp
+
     executor.start_webhook(
         dispatcher=dp,
         webhook_path=WEBHOOK_PATH,

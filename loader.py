@@ -15,4 +15,4 @@ ssl_context = ssl.SSLContext(ssl.PROTOCOL_TLSv1_2)
 SSL_CERTIFICATE = open(WEBHOOK_SSL_CERT, "rb").read()
 ssl_context.load_cert_chain(WEBHOOK_SSL_CERT, WEBHOOK_SSL_PRIV)
 
-__all__ = ['bot', 'dp', 'storage', 'db']
+#__all__ = ['bot', 'dp', 'storage', 'db']
