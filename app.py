@@ -14,7 +14,7 @@ async def on_startup(dispatcher):
     print("Connected to db!")
 
     print("Clear db")
-    await db.gino.drop_all()
+    #await db.gino.drop_all()
     print("Db cleared")
 
     print("Create tables")
