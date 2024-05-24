@@ -15,7 +15,7 @@ services:
     restart: on-failure
 
   py-test-bot:
-    container_name: tgbotpostgres
+    container_name: ginotgbot
     build: .
     command: python3.10 app.py
     env_file:
